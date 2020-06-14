@@ -31,7 +31,7 @@
             <ul class="nav-shop">
               <li class="nav-item"><a href="cart.php"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span></button></a> </li>
               <?php
-                if (!isset($_SESSION['email'])) {
+                if (!isset($_SESSION['user_email'])) {
                   echo '<li class="nav-item"><a class="button button-header" href="login.php">Login/Register</a></li>';
                 }
                 else{

@@ -48,7 +48,6 @@
 					<div class="login_box_img">
 						<div class="hover">
 							<h4>New to our website?</h4>
-							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
 							<a class="button button-account" href="register.php">Create an Account</a>
 						</div>
 					</div>
@@ -56,21 +55,15 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Log in to enter</h3>
-						<form class="row login_form" action="#/" id="contactForm" >
+						<form class="row login_form" action="login.php" id="contactForm" method="post">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+								<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+								<input type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
 							</div>
 							<div class="col-md-12 form-group">
-								<div class="creat_account">
-									<input type="checkbox" id="f-option2" name="selector">
-									<label for="f-option2">Keep me logged in</label>
-								</div>
-							</div>
-							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="button button-login w-100">Log In</button>
+								<button type="submit" value="submit" name="submit" class="button button-login w-100">Log In</button>
 								<a href="#">Forgot Password?</a>
 							</div>
 						</form>
@@ -99,3 +92,25 @@
   <script src="js/main.js"></script>
 </body>
 </html>
+
+<?php 
+	if(isset($_POST['submit'])){
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+
+		$sql = "SELECT * FROM users WHERE user_password = '$password' AND user_email = '$email'";
+		$runsql=$conn->query($sql);
+		if($runsql->num_rows == 0){
+			echo "<script>alert('Your password or email is incorrect, please try again!')</script>";
+			echo "<script>window.open('login.php', '_self');</script>";
+			exit();
+		}			
+		if($runsql->num_rows > 0){
+			$_SESSION['user_email'] = $email;
+			$row = $runsql->fetch_assoc();
+			$_SESSION['user_name'] = $row['user_name'];
+			echo "<script>alert('You logged in successfully!')</script>";
+			echo "<script>window.open('index.php','_self')</script>";
+		}
+	}
+?>
