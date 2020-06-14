@@ -32,7 +32,7 @@ CREATE TABLE `orders` (
   `user_name` varchar(50) DEFAULT NULL,
   `order_item` varchar(100) DEFAULT NULL,
   `cost` int(100) DEFAULT NULL,
-  `rest_name` varchar(100) DEFAULT NULL
+  `shop_name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -41,17 +41,17 @@ CREATE TABLE `orders` (
 -- Table structure for table `restaurants`
 --
 
-CREATE TABLE `restaurants` (
-  `rest_id` int(100) NOT NULL,
-  `rest_ownername` varchar(100) DEFAULT NULL,
-  `rest_name` varchar(100) DEFAULT NULL,
-  `rest_address` varchar(500) DEFAULT NULL,
-  `rest_email` varchar(50) DEFAULT NULL,
-  `rest_open` varchar(5) DEFAULT NULL,
-  `rest_close` varchar(5) DEFAULT NULL,
-  `rest_rating` float(2,1) DEFAULT NULL,
-  `rest_image` varchar(255) DEFAULT NULL,
-  `rest_cuisine` varchar(100) DEFAULT NULL,
+CREATE TABLE `shops` (
+  `shop_id` int(100) NOT NULL,
+  `shop_ownername` varchar(100) DEFAULT NULL,
+  `shop_name` varchar(100) DEFAULT NULL,
+  `shop_address` varchar(500) DEFAULT NULL,
+  `shop_email` varchar(50) DEFAULT NULL,
+  `shop_open` varchar(5) DEFAULT NULL,
+  `shop_close` varchar(5) DEFAULT NULL,
+  `shop_rating` float(2,1) DEFAULT NULL,
+  `shop_image` varchar(255) DEFAULT NULL,
+  `shop_cuisine` varchar(100) DEFAULT NULL,
   `num` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -87,8 +87,8 @@ CREATE TABLE `users` (
 --
 -- Indexes for table `restaurants`
 --
-ALTER TABLE `restaurants`
-  ADD PRIMARY KEY (`rest_id`);
+ALTER TABLE `shops`
+  ADD PRIMARY KEY (`shop_id`);
 
 --
 -- Indexes for table `users`
@@ -104,8 +104,8 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `restaurants`
 --
-ALTER TABLE `restaurants`
-  MODIFY `rest_id` int(100) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `shops`
+  MODIFY `shop_id` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
