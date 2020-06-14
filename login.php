@@ -47,8 +47,9 @@
 				<div class="col-lg-6">
 					<div class="login_box_img">
 						<div class="hover">
-							<h4>New to our website?</h4>
-							<a class="button button-account" href="register.php">Create an Account</a>
+							<p><h4>New to our website?</h4></p>
+							<p><a class="button button-account" href="register.php">Register as a Customer</a></p>
+							<a class="button button-account" href="shop/register.php">Register as a Shop</a>
 						</div>
 					</div>
 				</div>
