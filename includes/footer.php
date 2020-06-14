@@ -20,7 +20,7 @@
 							<h4 class="footer_title">Quick Links</h4>
 							<ul class="list">
 								<li><a href="index.php">Home</a></li>
-								<li><a href="category.php">Shop</a></li>
+								<li><a href="category.php">Stores</a></li>
 								<li><a href="contact.php">Contact</a></li>
 							</ul>
 						</div>

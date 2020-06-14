@@ -20,8 +20,12 @@
 							<h4 class="footer_title">Quick Links</h4>
 							<ul class="list">
 								<li><a href="index.php">Home</a></li>
-								<li><a href="manageShop.php">Manage Shop</a></li>
-								<li><a href="contact.php">Contact</a></li>
+								<?php
+              					  if (isset($_SESSION['shop_email'])) {
+              					    echo '<li><a href="manageShop.php">Manage Shop</a></li>';
+              					  }
+              					?>
+								<li><a href="../contact.php">Contact</a></li>
 							</ul>
 						</div>
 					</div>

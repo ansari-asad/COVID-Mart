@@ -17,7 +17,7 @@
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
               <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-              <li class="nav-item"><a href="./category.php" class="nav-link" >Stores</a></li>
+              <li class="nav-item"><a href="category.php" class="nav-link" >Stores</a></li>
               <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
             </ul>
 
