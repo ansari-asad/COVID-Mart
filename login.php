@@ -99,19 +99,31 @@
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
-		$sql = "SELECT * FROM users WHERE user_password = '$password' AND user_email = '$email'";
-		$runsql=$conn->query($sql);
-		if($runsql->num_rows == 0){
-			echo "<script>alert('Your password or email is incorrect, please try again!')</script>";
-			echo "<script>window.open('login.php', '_self');</script>";
-			exit();
-		}			
+		$sql_user = "SELECT * FROM users WHERE user_password = '$password' AND user_email = '$email'";
+		$sql_shop = "SELECT * FROM shops WHERE shop_password = '$password' AND shop_email = '$email'";
+		$runsql=$conn->query($sql_user);
+
 		if($runsql->num_rows > 0){
 			$_SESSION['user_email'] = $email;
 			$row = $runsql->fetch_assoc();
 			$_SESSION['user_name'] = $row['user_name'];
 			echo "<script>alert('You logged in successfully!')</script>";
 			echo "<script>window.open('index.php','_self')</script>";
+		}
+		else{
+			$runsql=$conn->query($sql_shop);
+			if($runsql->num_rows > 0){
+				$_SESSION['shop_email'] = $email;
+				$row = $runsql->fetch_assoc();
+				$_SESSION['shop_name'] = $row['shop_name'];
+				echo "<script>alert('You logged in successfully!')</script>";
+				echo "<script>window.open('shop/index.php','_self')</script>";
+			}
+			else{
+				echo "<script>alert('Your password or email is incorrect, please try again!')</script>";
+				echo "<script>window.open('login.php', '_self');</script>";
+				exit();
+			}
 		}
 	}
 ?>

@@ -95,6 +95,18 @@
   <script src="vendors/jquery.ajaxchimp.min.js"></script>
   <script src="vendors/mail-script.js"></script>
   <script src="js/main.js"></script>
+  <script type="text/javascript">
+  	document.getElementById('submit').addEventListener('click', (event) => {checkValues(event)});
+
+  	function checkValues(evt) {
+  		var pwd = document.getElementById('password').value;
+  		var cnf = document.getElementById('confirmPassword').value;
+  		if (pwn != cnf) {
+  			alert('Passwords do not match!');
+  			evt.preventDefault();
+  		}
+  	}
+  </script>
 </body>
 </html>
 

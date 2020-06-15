@@ -217,6 +217,12 @@ if(isset($_POST['submit'])){
 	$password = $_POST['password'];
 	$confirmPassword = $_POST['confirmPassword'];
 
+  if ($password != $confirmPassword) {
+    echo "<script>alert('Passwords do not match!');</script>";
+    echo "<script>window.open('register.php', '_self');</script>";
+    exit();
+  }
+
 	$sql = "SELECT * FROM shops WHERE shop_email='$email'";
 	$result = mysqli_query($conn, $sql);
     $resultcheck = mysqli_num_rows($result);
@@ -225,10 +231,15 @@ if(isset($_POST['submit'])){
        echo "<script>window.open('register.php', '_self');</script>";
        exit();
     }
-    if ($password != $confirmPassword) {
-    	echo "<script>alert('Passwords do not match!');</script>";
-    	echo "<script>window.open('register.php', '_self');</script>";
-    	exit();
+    else{
+      $sql = "SELECT * FROM shops WHERE shop_name='$name' AND shop_address='$address'";
+      $result = mysqli_query($conn, $sql);
+      $resultcheck = mysqli_num_rows($result);
+      if($resultcheck > 0){
+         echo "<script>alert('Shop already in Registered!');</script>";
+         echo "<script>window.open('login.php', '_self');</script>";
+         exit();
+      }
     }
 
     $value =0;
