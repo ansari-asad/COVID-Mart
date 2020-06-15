@@ -117,6 +117,12 @@ if(isset($_POST['submit'])){
 	$password = $_POST['password'];
 	$confirmPassword = $_POST['confirmPassword'];
 
+	if ($password != $confirmPassword) {
+    	echo "<script>alert('Passwords do not match!');</script>";
+    	echo "<script>window.open('register.php', '_self');</script>";
+    	exit();
+    }
+
 	$sql = "SELECT * FROM users WHERE user_email='$email'";
 	$result = mysqli_query($conn, $sql);
     $resultcheck = mysqli_num_rows($result);
@@ -125,13 +131,9 @@ if(isset($_POST['submit'])){
        echo "<script>window.open('register.php', '_self');</script>";
        exit();
     }
-    if ($password != $confirmPassword) {
-    	echo "<script>alert('Passwords do not match!');</script>";
-    	echo "<script>window.open('register.php', '_self');</script>";
-    	exit();
-    }
-		
-	$sql = "INSERT INTO users(user_name,user_email,user_password) VALUES ('$name','$email','$password')";
+
+    $hashpwd = password_hash($password,PASSWORD_DEFAULT);
+	$sql = "INSERT INTO users(user_name,user_email,user_password) VALUES ('$name','$email','$hashpwd')";
 
 	if (mysqli_query($conn, $sql)) {
 		echo "<script>alert('Registration Successful!');</script>";

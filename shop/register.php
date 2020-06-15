@@ -225,24 +225,25 @@ if(isset($_POST['submit'])){
 
 	$sql = "SELECT * FROM shops WHERE shop_email='$email'";
 	$result = mysqli_query($conn, $sql);
+  $resultcheck = mysqli_num_rows($result);
+  if($resultcheck > 0){
+     echo "<script>alert('Email already in Use!');</script>";
+     echo "<script>window.open('register.php', '_self');</script>";
+     exit();
+  }
+  else{
+    $sql = "SELECT * FROM shops WHERE shop_name='$name' AND shop_address='$address'";
+    $result = mysqli_query($conn, $sql);
     $resultcheck = mysqli_num_rows($result);
     if($resultcheck > 0){
-       echo "<script>alert('Email already in Use!');</script>";
-       echo "<script>window.open('register.php', '_self');</script>";
+       echo "<script>alert('Shop already in Registered!');</script>";
+       echo "<script>window.open('login.php', '_self');</script>";
        exit();
     }
-    else{
-      $sql = "SELECT * FROM shops WHERE shop_name='$name' AND shop_address='$address'";
-      $result = mysqli_query($conn, $sql);
-      $resultcheck = mysqli_num_rows($result);
-      if($resultcheck > 0){
-         echo "<script>alert('Shop already in Registered!');</script>";
-         echo "<script>window.open('login.php', '_self');</script>";
-         exit();
-      }
-    }
+  }
 
-    $value =0;
+  $hashpwd = password_hash($password,PASSWORD_DEFAULT);
+  $value =0;
 	if(isset($_FILES['image'])){
 		$image =  $_FILES['image'];
 		print_r($image);
@@ -254,7 +255,7 @@ if(isset($_POST['submit'])){
 			$destinationFile = 'images/'.$imagename;
 			move_uploaded_file($_FILES['image']['tmp_name'], $destinationFile);
 			$sqlInsert = "INSERT INTO shops(shop_name,shop_address,shop_email,shop_open,shop_close,shop_cuisine,shop_rating,shop_image,num,shop_password) 
-			values('$name','$address','$email','$open','$close','$cuisine','0','$destinationFile','$num','$password');";
+			values('$name','$address','$email','$open','$close','$cuisine','0','$destinationFile','$num','$hashpwd');";
 			mysqli_query($conn,$sqlInsert);
 		}
 		else{
@@ -264,7 +265,7 @@ if(isset($_POST['submit'])){
 	}
 	else{
 		$sqlInsert = "INSERT INTO shops(shop_name,shop_address,shop_email,shop_open,shop_close,shop_cuisine,shop_rating,num,shop_password) 
-			values('$name','$address','$email','$open','$close','$cuisine','0','$num','$password');";
+			values('$name','$address','$email','$open','$close','$cuisine','0','$num','$hashpwd');";
 		mysqli_query($conn,$sqlInsert);
 	}
 	foreach ($slot as $value){

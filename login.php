@@ -99,22 +99,23 @@
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
-		$sql_user = "SELECT * FROM users WHERE user_password = '$password' AND user_email = '$email'";
-		$sql_shop = "SELECT * FROM shops WHERE shop_password = '$password' AND shop_email = '$email'";
+		$sql_user = "SELECT * FROM users WHERE user_email = '$email'";
+		$sql_shop = "SELECT * FROM shops WHERE shop_email = '$email'";
 		$runsql=$conn->query($sql_user);
+		$row = $runsql->fetch_assoc();
 
-		if($runsql->num_rows > 0){
+		if($runsql->num_rows > 0 and password_verify($password, $row['user_password'])){
 			$_SESSION['user_email'] = $email;
-			$row = $runsql->fetch_assoc();
 			$_SESSION['user_name'] = $row['user_name'];
 			echo "<script>alert('You logged in successfully!')</script>";
 			echo "<script>window.open('index.php','_self')</script>";
 		}
 		else{
 			$runsql=$conn->query($sql_shop);
-			if($runsql->num_rows > 0){
+			$row = $runsql->fetch_assoc();
+
+			if($runsql->num_rows > 0 and password_verify($password, $row['shop_password'])){
 				$_SESSION['shop_email'] = $email;
-				$row = $runsql->fetch_assoc();
 				$_SESSION['shop_name'] = $row['shop_name'];
 				echo "<script>alert('You logged in successfully!')</script>";
 				echo "<script>window.open('shop/index.php','_self')</script>";
