@@ -57,19 +57,78 @@
 						<h3>Create an account</h3>
 						<form class="row login_form" action="register.php" id="register_form" method="post">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+								<input type="text" class="form-control" id="name" name="name" placeholder="Shop Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Shop Name'" required>
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
-              </div>
-              <div class="col-md-12 form-group">
-								<input type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
-              </div>
-              <div class="col-md-12 form-group">
-								<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password'">
+								<input type="textarea" class="form-control" id="Address" name="Address" placeholder="Shop Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Shop Address'" required>
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" name="submit" class="button button-register w-100">Register</button>
+								<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'" required>
+              </div>
+              <div class="col-md-12 form-group">
+              	<button type="button" id="butn" class="button button-login">Image of Shop<input type="file" id="image" name="image" hidden></button>
+              </div>
+              <div class="col-md-12 form-group filter-bar">
+              	Select Category
+              	<div class="creat_account">
+                <input type="checkbox" id="f-option" name="cuisine[]" value="Medical">
+                <label for="f-option">Medical</label>
+                </div>
+                <div class="creat_account">
+                <input type="checkbox" id="f-option" name="cuisine[]" value="Fruits & Vegetables">
+                <label for="f-option">Fruits & Vegetables</label>
+                </div>
+                <div class="creat_account">
+                <input type="checkbox" id="f-option" name="cuisine[]" value="Household">
+                <label for="f-option">Household</label>
+                </div>
+                <div class="creat_account">
+                <input type="checkbox" id="f-option" name="cuisine[]" value="Packaged Food">
+                <label for="f-option">Packaged Food</label>
+                </div>
+                <div class="creat_account">
+                <input type="checkbox" id="f-option" name="cuisine[]" value="Eggs & Meat">
+                <label for="f-option">Eggs & Meat</label>
+                </div>
+                <div class="creat_account">
+                <input type="checkbox" id="f-option" name="cuisine[]" value="Beauty & Hygiene">
+                <label for="f-option">Beauty & Hygiene</label>
+                </div>
+                <div class="creat_account">
+                <input type="checkbox" id="f-option" name="cuisine[]" value="Others">
+                <label for="f-option">Others</label>
+                </div>
+              </div>
+              <div class="col-md-12 form-group filter-bar">
+              	Timings<br>
+              	<div class="sorting col-xl-9 col-lg-8 col-md-7">
+              		<label for="open">Opening Time</label>
+              		<select name="open" id="open">
+              			<option value="9:00">09:00</option>
+						<option value="10:00">10:00</option>
+						<option value="11:00">11:00</option>
+              		</select>
+              	</div>
+              	<div class="sorting col-xl-9 col-lg-8 col-md-7">
+              		<label for="close">Closing Time</label>
+              		<select name="close" id="close">
+              			<option value="21:00">21:00</option>
+						<option value="22:00">22:00</option>
+						<option value="23:00">23:00</option>
+              		</select>
+              	</div>
+              </div>
+              <div class="col-md-12 form-group">
+								<input type="number" class="form-control" id="num" name="num" placeholder="No. of people per 30 min slot" onfocus="this.placeholder = ''" onblur="this.placeholder = 'No. of people per 30 min slot'" min="1" max="20" required>
+              </div>
+              <div class="col-md-12 form-group">
+								<input type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
+              </div>
+              <div class="col-md-12 form-group">
+								<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password'" required>
+							</div>
+							<div class="col-md-12 form-group">
+								<button id="submit" type="submit" value="submit" name="submit" class="button button-register w-100">Register</button>
 							</div>
 						</form>
 					</div>
@@ -95,17 +154,70 @@
   <script src="../vendors/jquery.ajaxchimp.min.js"></script>
   <script src="../vendors/mail-script.js"></script>
   <script src="../js/main.js"></script>
+  <script type="text/javascript">
+  	document.getElementById('butn').addEventListener('click', openDialog);
+
+  	document.getElementById('submit').addEventListener('click', (event) => {checkValues(event)});
+
+  	function checkValues(evt) {
+  		var pwd = document.getElementById('password').value;
+  		var cnf = document.getElementById('confirmPassword').value;
+  		if (pwn != cnf) {
+  			alert('Passwords do not match!');
+  			evt.preventDefault();
+  		}
+  		getSelectedCheckboxValues(evt);
+  	}
+
+  	function getSelectedCheckboxValues(evt) {
+	    const checkboxes = document.querySelectorAll(`input[name="cuisine[]"]:checked`);
+	    checkboxes.forEach((checkbox) => {
+	        if (checkbox.checked == checked) {
+	        	return;
+	        }
+	    });
+	    alert('Select the Category!');
+	    evt.preventDefault();
+	}
+
+	function openDialog() {
+	  document.getElementById('image').click();
+	}
+  </script>
 </body>
 </html>
 
 <?php
+function slotList($start,$close){
+    $start=explode(':',$start);
+    $close=explode(':',$close);
+    $slot=array();
+    while($start[0]<$close[0]){
+        $slot[] = $start[0].'00';
+        $slot[] = $start[0].'30';
+        $start[0] = (int)$start[0] + 1;
+        $start[0] = (string)$start[0];
+    }
+    return $slot;
+}
 if(isset($_POST['submit'])){
 	$name = $_POST['name'];
+	$address = $_POST['Address'];
 	$email = $_POST['email'];
+	$cuisine='';
+	if(!empty($_POST['cuisine']))
+		foreach ($_POST['cuisine'] as $key) {
+			$cuisine.=','.$key;
+	}
+	$cuisine = substr($cuisine, 1);
+	$open = $_POST['open'];
+	$close = $_POST['close'];
+	$slot = slotList($open,$close);
+	$num = $_POST['num'];
 	$password = $_POST['password'];
 	$confirmPassword = $_POST['confirmPassword'];
 
-	$sql = "SELECT * FROM users WHERE user_email='$email'";
+	$sql = "SELECT * FROM shops WHERE shop_email='$email'";
 	$result = mysqli_query($conn, $sql);
     $resultcheck = mysqli_num_rows($result);
     if($resultcheck > 0){
@@ -118,16 +230,48 @@ if(isset($_POST['submit'])){
     	echo "<script>window.open('register.php', '_self');</script>";
     	exit();
     }
-		
-	$sql = "INSERT INTO users(user_name,user_email,user_password) VALUES ('$name','$email','$password')";
 
-	if (mysqli_query($conn, $sql)) {
-		echo "<script>alert('Registration Successful!');</script>";
-		echo "<script>window.open('login.php', '_self');</script>";
-	} else {
-	    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    $value =0;
+	if(isset($_FILES['image'])){
+		$image =  $_FILES['image'];
+		print_r($image);
+		$imagename = $_FILES['image']['name'];
+		$fileExtension = explode('.', $imagename);
+		$fileCheck = strtolower(end($fileExtension));
+		$fileExtensionStored = array('png','jpg','jpeg');
+		if(in_array($fileCheck, $fileExtensionStored)){
+			$destinationFile = 'images/'.$imagename;
+			move_uploaded_file($_FILES['image']['tmp_name'], $destinationFile);
+			$sqlInsert = "INSERT INTO shops(shop_name,shop_address,shop_email,shop_open,shop_close,shop_cuisine,shop_rating,shop_image,num,shop_password) 
+			values('$name','$address','$email','$open','$close','$cuisine','0','$destinationFile','$num','$password');";
+			mysqli_query($conn,$sqlInsert);
+		}
+		else{
+			echo "<script>alert('Only png, jpg, and jpeg formats supported!');</script>";
+			echo "<script>window.open('register.php', '_self');</script>";
+		}
 	}
-
+	else{
+		$sqlInsert = "INSERT INTO shops(shop_name,shop_address,shop_email,shop_open,shop_close,shop_cuisine,shop_rating,num,shop_password) 
+			values('$name','$address','$email','$open','$close','$cuisine','0','$num','$password');";
+		mysqli_query($conn,$sqlInsert);
+	}
+	foreach ($slot as $value){
+        $slotInsert= "INSERT INTO SLOTS values('$email','$value','$num')";
+        if(!mysqli_query($conn,$slotInsert)){
+            echo mysqli_error($conn);
+        }
+    }
+	$restname = str_replace(' ','',$name);
+	$addRest="CREATE table $restname(
+		dish_id int(100) Auto_increment primary key,
+		cuisine varchar(50),
+		type varchar(50),
+		cost int(100)
+	)";
+	if(!mysqli_query($conn,$addRest))
+		echo mysqli_error($conn);
+	echo "<script>window.open('../login.php', '_self');</script>";
 	mysqli_close($conn);
 }
 ?>

@@ -27,11 +27,11 @@
 
             <ul class="nav-shop">
               <?php
-                if (!isset($_SESSION['user_email'])) {
+                if (!isset($_SESSION['shop_email'])) {
                   echo '<li class="nav-item"><a class="button button-header" href="../login.php">Login/Register</a></li>';
                 }
                 else{
-                  echo $_SESSION['user_name'];
+                  echo $_SESSION['shop_name'];
                   echo '<li class="nav-item"><a class="button button-header" href="../logout.php">Logout</a></li>';
                 }
               ?>

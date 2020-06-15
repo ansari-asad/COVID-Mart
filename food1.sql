@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2020 at 12:51 PM
+-- Generation Time: Jun 15, 2020 at 06:10 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `food`
+-- Database: `food1`
 --
 
 -- --------------------------------------------------------
@@ -38,12 +38,11 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurants`
+-- Table structure for table `shops`
 --
 
 CREATE TABLE `shops` (
   `shop_id` int(100) NOT NULL,
-  `shop_ownername` varchar(100) DEFAULT NULL,
   `shop_name` varchar(100) DEFAULT NULL,
   `shop_address` varchar(500) DEFAULT NULL,
   `shop_email` varchar(50) DEFAULT NULL,
@@ -52,7 +51,8 @@ CREATE TABLE `shops` (
   `shop_rating` float(2,1) DEFAULT NULL,
   `shop_image` varchar(255) DEFAULT NULL,
   `shop_cuisine` varchar(100) DEFAULT NULL,
-  `num` int(10) DEFAULT NULL
+  `num` int(10) DEFAULT NULL,
+  `shop_password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -62,7 +62,7 @@ CREATE TABLE `shops` (
 --
 
 CREATE TABLE `slots` (
-  `StoreName` varchar(100) NOT NULL,
+  `shop_email` varchar(50) NOT NULL,
   `Slot` varchar(100) NOT NULL,
   `No of available` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -85,10 +85,11 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `restaurants`
+-- Indexes for table `shops`
 --
 ALTER TABLE `shops`
-  ADD PRIMARY KEY (`shop_id`);
+  ADD PRIMARY KEY (`shop_id`),
+  ADD UNIQUE KEY `shop_email` (`shop_email`);
 
 --
 -- Indexes for table `users`
@@ -102,7 +103,7 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `restaurants`
+-- AUTO_INCREMENT for table `shops`
 --
 ALTER TABLE `shops`
   MODIFY `shop_id` int(100) NOT NULL AUTO_INCREMENT;
@@ -111,7 +112,7 @@ ALTER TABLE `shops`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
