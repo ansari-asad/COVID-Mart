@@ -111,7 +111,7 @@
 								<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password'" required>
 							</div>
 							<div class="col-md-12 form-group">
-								<button id="submit" type="submit" value="submit" name="submit" class="button button-register w-100">Register</button>
+								<button type="submit" value="submit" id="submit" name="submit" class="button button-login w-100">Register</button>
 							</div>
 						</form>
 					</div>
