@@ -247,6 +247,7 @@ if(isset($_POST['submit'])){
 	$addRest="CREATE table $restname(
 		dish_id int(100) Auto_increment primary key,
 		cuisine varchar(50),
+		quantity int(100),
 		type varchar(50),
 		cost int(100)
 	)";

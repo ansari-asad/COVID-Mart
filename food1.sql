@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2020 at 06:10 PM
+-- Generation Time: Jun 16, 2020 at 06:01 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `orders` (
   `user_name` varchar(50) DEFAULT NULL,
   `order_item` varchar(100) DEFAULT NULL,
+  `quantity` int(100) NOT NULL,
   `cost` int(100) DEFAULT NULL,
   `shop_name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
