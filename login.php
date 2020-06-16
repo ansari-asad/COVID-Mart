@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+	include 'includes/header.php';
+?>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>COVID-Mart | Login</title>
-	<link rel="icon" href="img/Fevicon.png" type="image/png">
-  <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-	<link rel="stylesheet" href="vendors/themify-icons/themify-icons.css">
-	<link rel="stylesheet" href="vendors/linericon/style.css">
-  <link rel="stylesheet" href="vendors/owl-carousel/owl.theme.default.min.css">
-  <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-  <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
-  <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
-
-  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-	<?php
-		include 'includes/header.php';
-	?>
   
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
@@ -64,7 +47,7 @@
 								<input type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" name="submit" class="button button-login w-100">Log In</button>
+								<button type="submit" value="submit" id="submit" name="submit" class="button button-login w-100">Log In</button>
 								<a href="#">Forgot Password?</a>
 							</div>
 						</form>
@@ -75,24 +58,22 @@
 	</section>
 	<!--================End Login Box Area =================-->
 
+<script type="text/javascript">
+  	document.getElementById('submit').addEventListener('click', (event) => {checkValues(event)});
 
+  	function checkValues(evt) {
+  		var pwd = document.getElementById('password').value;
+  		var cnf = document.getElementById('confirmPassword').value;
+  		if (pwn != cnf) {
+  			alert('Passwords do not match!');
+  			evt.preventDefault();
+  		}
+  	}
+</script>
 
-  <?php
-  	include 'includes/footer.php';
-  ?>
-
-
-
-  <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-  <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-  <script src="vendors/skrollr.min.js"></script>
-  <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-  <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
-  <script src="vendors/jquery.ajaxchimp.min.js"></script>
-  <script src="vendors/mail-script.js"></script>
-  <script src="js/main.js"></script>
-</body>
-</html>
+<?php
+	include 'includes/footer.php';
+?>
 
 <?php 
 	if(isset($_POST['submit'])){
