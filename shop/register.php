@@ -71,32 +71,32 @@
               <div class="col-md-12 form-group filter-bar">
               	Select Category
               	<div class="creat_account">
-                <input type="checkbox" id="f-option" name="cuisine[]" value="Medical">
-                <label for="f-option">Medical</label>
+                <input type="checkbox" id="f-option1" name="cuisine[]" value="Medical">
+                <label for="f-option1">Medical</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option" name="cuisine[]" value="Fruits & Vegetables">
-                <label for="f-option">Fruits & Vegetables</label>
+                <input type="checkbox" id="f-option2" name="cuisine[]" value="Fruits & Vegetables">
+                <label for="f-option2">Fruits & Vegetables</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option" name="cuisine[]" value="Household">
-                <label for="f-option">Household</label>
+                <input type="checkbox" id="f-option2" name="cuisine[]" value="Household">
+                <label for="f-option2">Household</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option" name="cuisine[]" value="Packaged Food">
-                <label for="f-option">Packaged Food</label>
+                <input type="checkbox" id="f-option3" name="cuisine[]" value="Packaged Food">
+                <label for="f-option3">Packaged Food</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option" name="cuisine[]" value="Eggs & Meat">
-                <label for="f-option">Eggs & Meat</label>
+                <input type="checkbox" id="f-option4" name="cuisine[]" value="Eggs & Meat">
+                <label for="f-option4">Eggs & Meat</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option" name="cuisine[]" value="Beauty & Hygiene">
-                <label for="f-option">Beauty & Hygiene</label>
+                <input type="checkbox" id="f-option5" name="cuisine[]" value="Beauty & Hygiene">
+                <label for="f-option5">Beauty & Hygiene</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option" name="cuisine[]" value="Others">
-                <label for="f-option">Others</label>
+                <input type="checkbox" id="f-option6" name="cuisine[]" value="Others">
+                <label for="f-option6">Others</label>
                 </div>
               </div>
               <div class="col-md-12 form-group filter-bar">
