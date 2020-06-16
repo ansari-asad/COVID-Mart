@@ -9,8 +9,9 @@
   <button class="tablink" onclick="openPage('Shop', this)">Shop</button>
   
   <div id="Inventory" class="tabcontent">
-    <h3>Inventory</h3>
-    <p>Home is where the heart is..</p>
+    <?php
+      include 'inventory.php';
+    ?>
   </div>
   
   <div id="Shop" class="tabcontent">

@@ -245,11 +245,11 @@ if(isset($_POST['submit'])){
     }
 	$restname = str_replace(' ','',$name);
 	$addRest="CREATE table $restname(
-		dish_id int(100) Auto_increment primary key,
-		cuisine varchar(50),
+		item_id int(100) Auto_increment primary key,
+		name varchar(50),
 		quantity int(100),
-		type varchar(50),
-		cost int(100)
+		category varchar(50),
+		price int(100)
 	)";
 	if(!mysqli_query($conn,$addRest))
 		echo mysqli_error($conn);
