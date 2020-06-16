@@ -79,24 +79,24 @@
                 <label for="f-option2">Fruits & Vegetables</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option2" name="cuisine[]" value="Household">
-                <label for="f-option2">Household</label>
+                <input type="checkbox" id="f-option3" name="cuisine[]" value="Household">
+                <label for="f-option3">Household</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option3" name="cuisine[]" value="Packaged Food">
-                <label for="f-option3">Packaged Food</label>
+                <input type="checkbox" id="f-option4" name="cuisine[]" value="Packaged Food">
+                <label for="f-option4">Packaged Food</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option4" name="cuisine[]" value="Eggs & Meat">
-                <label for="f-option4">Eggs & Meat</label>
+                <input type="checkbox" id="f-option5" name="cuisine[]" value="Eggs & Meat">
+                <label for="f-option5">Eggs & Meat</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option5" name="cuisine[]" value="Beauty & Hygiene">
-                <label for="f-option5">Beauty & Hygiene</label>
+                <input type="checkbox" id="f-option6" name="cuisine[]" value="Beauty & Hygiene">
+                <label for="f-option6">Beauty & Hygiene</label>
                 </div>
                 <div class="creat_account">
-                <input type="checkbox" id="f-option6" name="cuisine[]" value="Others">
-                <label for="f-option6">Others</label>
+                <input type="checkbox" id="f-option7" name="cuisine[]" value="Others">
+                <label for="f-option7">Others</label>
                 </div>
               </div>
               <div class="col-md-12 form-group filter-bar">
