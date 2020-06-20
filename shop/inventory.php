@@ -45,7 +45,7 @@
     		    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
     		  	<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
     		</div></td>
-    		<td><div class="sorting">
+    		<td><div class="dropdown">
     			<select name="category">
     				<?php
     				$email = $_SESSION['shop_email'];
