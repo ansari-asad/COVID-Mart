@@ -30,7 +30,7 @@
         <div id="map" style="height: 420px;"></div>
         <script>
           function initMap() {
-            var uluru = {lat: -25.363, lng: 131.044};
+            var uluru = {lat: 13.1334, lng: 77.5674};
             var grayStyles = [
               {
                 featureType: "all",
@@ -42,7 +42,7 @@
               {elementType: 'labels.text.fill', stylers: [{color: '#A3A3A3'}]}
             ];
             var map = new google.maps.Map(document.getElementById('map'), {
-              center: {lat: -31.197, lng: 150.744},
+              center: {lat: 13.1334, lng: 77.5674},
               zoom: 9,
               styles: grayStyles,
               scrollwheel:  false
@@ -60,21 +60,21 @@
           <div class="media contact-info">
             <span class="contact-info__icon"><i class="ti-home"></i></span>
             <div class="media-body">
-              <h3>California United States</h3>
-              <p>Santa monica bullevard</p>
+              <h3>Karnataka, India</h3>
+              <p>BMS Institute of Technology & Management</p>
             </div>
           </div>
           <div class="media contact-info">
             <span class="contact-info__icon"><i class="ti-headphone"></i></span>
             <div class="media-body">
-              <h3><a href="tel:454545654">00 (440) 9865 562</a></h3>
+              <h3><a href="tel:454545654">080 2856 1576</a></h3>
               <p>Mon to Fri 9am to 6pm</p>
             </div>
           </div>
           <div class="media contact-info">
             <span class="contact-info__icon"><i class="ti-email"></i></span>
             <div class="media-body">
-              <h3><a href="mailto:support@colorlib.com">support@colorlib.com</a></h3>
+              <h3><a href="mailto:support@colorlib.com">ansari.asad0106@gmail.com</a></h3>
               <p>Send us your query anytime!</p>
             </div>
           </div>
