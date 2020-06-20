@@ -1,6 +1,6 @@
 <center> <h3>Modify Account</h3> </center>
 <hr>
-<form action="slot_no.php" method="post">
+<form action="shop.php" method="post">
 <div class="col-md-12 filter-bar align-items-center">
 <h4>Number of customers per 30 minute slot</h4>
 <hr>
@@ -13,7 +13,7 @@
 </div>
  
 </form>
-<form action="modify_category.php" method="post">
+<form action="shop.php" method="post">
 
 <div class="col-md-12 filter-bar align-items-center">
 <h4>Select Categories</h4>
@@ -54,6 +54,8 @@
 
 <?php
 /*
+session_start();
+
 include '../core/init.php';
 
 if (isset($_POST['modify_category'])) {
