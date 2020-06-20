@@ -15,8 +15,9 @@
   </div>
   
   <div id="Shop" class="tabcontent">
-    <h3>Shop</h3>
-    <p>Some news this fine day!</p>
+    <?php
+      include 'shop.php';
+    ?>
   </div>
 
   <?php
