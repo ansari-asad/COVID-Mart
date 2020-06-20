@@ -73,4 +73,13 @@
   		height: 300px;
   		overflow: scroll;
 	}
+	input[type=text],input[type=number], select {
+  width: 60%;
+  padding: 7px 10px;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 </style>
