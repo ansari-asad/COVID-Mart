@@ -20,10 +20,6 @@
     ?>
   </div>
 
-  <?php
-    include 'includes/footer.php';
-  ?>
-  
   <style type="text/css">
     .tablink {
     background-color: #555;
@@ -74,3 +70,7 @@
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
   </script>
+
+<?php
+  include 'includes/footer.php';
+?>

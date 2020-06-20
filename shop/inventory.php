@@ -2,7 +2,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col"><input type="checkbox" id="all" name="all" value="all"></th>
+				<th scope="col"><input type="checkbox" id="all" name="all" onclick="toggle(this)" value="all"></th>
 				<th scope="col">Item ID</th>
 				<th scope="col">Name</th>
 				<th scope="col">Quantity</th>
@@ -17,7 +17,7 @@
 			$runsql = $conn->query($sql);
 			while ($row = $runsql->fetch_assoc()) {
 				echo '<tr>
-				<td><input type="checkbox" id="'.$row['item_id'].'" value="'.$row['item_id'].'"></td>
+				<td><input type="checkbox" name="chkbox" id="'.$row['item_id'].'" onclick="modifiable()" value="'.$row['item_id'].'"></td>
 				<td>'.$row['item_id'].'</td>
 				<td>'.$row['name'].'</td>
 				<td>'.$row['quantity'].'</td>
@@ -83,3 +83,19 @@
   box-sizing: border-box;
 }
 </style>
+
+<script type="text/javascript">
+	function toggle(source) {
+	  var checkboxes = document.getElementsByName('chkbox');
+	  for(var i=0, n=checkboxes.length;i<n;i++) {
+	    checkboxes[i].checked = source.checked;
+	  }
+	  modifiable();
+	}
+
+	function modifiable(){
+		if(document.querySelectorAll('input[name="chkbox"]:checked').length >= 2){
+			document.getElementById('modify').disabled = true;
+		}
+	}
+</script>
