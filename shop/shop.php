@@ -1,11 +1,11 @@
 <center> <h3>Modify Account</h3> </center>
 <hr>
-<form action="shop.php" method="post">
-<div class="col-md-12 filter-bar align-items-center">
+<form action="modify.php" method="post">
+<div class=" filter-bar align-items-center">
 <h4>Number of customers per 30 minute slot</h4>
 <hr>
-    <div class="col-md-12">
-		<input type="number" class="form-control" id="num" name="num" placeholder="No. of people per 30 min slot" onfocus="this.placeholder = ''" onblur="this.placeholder = 'No. of people per 30 min slot'" min="1" max="20" required>
+    <div>
+		<input type="number" style="width:100%;" class="form-control" id="num" name="num" placeholder="No. of people per 30 min slot" onfocus="this.placeholder = ''" onblur="this.placeholder = 'No. of people per 30 min slot'" min="1" max="20" required>
     </div>
     <div class="text-center">
         <button style="margin:5px;" type="submit" id="slot_no" name="slot_no" class="button button-login">Modify No. of People per Slot</button>
@@ -13,7 +13,7 @@
 </div>
  
 </form>
-<form action="shop.php" method="post">
+<form action="modify.php" method="post">
 
 <div class="col-md-12 filter-bar align-items-center">
 <h4>Select Categories</h4>
@@ -52,22 +52,4 @@
     </div>
 </form>
 
-<?php
-/*
-session_start();
 
-include '../core/init.php';
-
-if (isset($_POST['modify_category'])) {
-	$cuisine='';
-	if(!empty($_POST['cuisine']))
-		foreach ($_POST['cuisine'] as $key) {
-			$cuisine.=','.$key;
-	}
-	$cuisine = substr($cuisine, 1);
-	$shop = str_replace(' ','',$_POST['shop']);
-	$sql = "UPDATE $shop_name SET shop_cuisine=$cuisine WHERE ";
-	mysqli_query($conn, $sql);
-    echo "<script>window.open('manageShop.php','_self')</script>";
-    */
-    ?>
