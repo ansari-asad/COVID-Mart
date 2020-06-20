@@ -7,12 +7,9 @@
 						<div class="single-footer-widget tp_widgets">
 							<h4 class="footer_title large_title">Our Mission</h4>
 							<p>
-								So seed seed green that winged cattle in. Gathering thing made fly you're no 
-								divided deep moved us lan Gathering thing us land years living.
+								To digitize the local stores and provide a safe and secure way to procure and sell essentials during this pandemic.
 							</p>
-							<p>
-								So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved 
-							</p>
+							
 						</div>
 					</div>
 					<div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
@@ -34,15 +31,15 @@
 									<span class="fa fa-location-arrow"></span>
 									Head Office
 								</p>
-								<p>123, Main Street, Your City</p>
+								<p>BMS Institute of Technology, Bangalore</p>
 	
 								<p class="sm-head">
 									<span class="fa fa-phone"></span>
 									Phone Number
 								</p>
 								<p>
-									+123 456 7890 <br>
-									+123 456 7890
+
+									080 2856 1576 
 								</p>
 	
 								<p class="sm-head">
@@ -50,8 +47,10 @@
 									Email
 								</p>
 								<p>
-									free@infoexample.com <br>
-									www.infoexample.com
+									ansari.asad0106@gmail.com <br>
+									dhawal.negi1@gmail.com <br>
+									drishtiramesh1@gmail.com
+									
 								</p>
 							</div>
 						</div>
