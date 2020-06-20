@@ -5,8 +5,8 @@
   <title>COVID-Mart | Manage</title>
 </head>
 
-  <button class="tablink" onclick="openPage('Inventory', this)" id="defaultOpen">Inventory</button>
-  <button class="tablink" onclick="openPage('Shop', this)">Shop</button>
+  <button class="tablink" onclick="openPage('Inventory', this, 'Shop')" id="defaultOpen">Inventory</button>
+  <button class="tablink" onclick="openPage('Shop', this, 'Inventory')">Shop</button>
   
   <div id="Inventory" class="tabcontent">
     <?php
@@ -49,9 +49,13 @@
   }
   </style>
   <script type="text/javascript">
-    function openPage(pageName, elmnt) {
+    function openPage(pageName, elmnt, pageout) {
+
+      document.getElementById(pageout).style.display = 'None';
+
+      document.getElementById(pageName).style.display = 'block';
       // Hide all elements with class="tabcontent" by default */
-      var i, tabcontent, tablinks;
+      /*var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
       for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
@@ -64,7 +68,7 @@
       }
     
       // Show the specific tab content
-      document.getElementById(pageName).style.display = "block";
+      document.getElementById(pageName).style.display = "block";*/
     }
     
     // Get the element with id="defaultOpen" and click on it
