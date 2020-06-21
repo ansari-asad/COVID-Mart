@@ -1,14 +1,18 @@
 <?php
   include 'includes/header.php';
   include 'core/init.php';
-	
-	@$name = $_SESSION['user_name'];
-  @$email = $_SESSION['user_email'];
   
-	$criteria = $_GET['criteria'];
-	$sql = "SELECT * from shops";
+  $criteria = 'all';
+  if (isset($_GET['criteria'])) {
+    $criteria = $_GET['criteria'];
+  }
+  else{
+    echo "<script>window.location.href = 'category.php?criteria=all'</script>";
+  }
+	
+	/*$sql = "SELECT * from shops";
 	$result = mysqli_query($conn,$sql);
-	$id = '';
+	$id = $criteria;
 	$ans = array();
 	if(mysqli_num_rows($result)>0){
 		while($row = mysqli_fetch_array($result)){
@@ -20,21 +24,16 @@
 				}
 			}
 		}
-	}
-	if(strlen($id)>0){
-		$id = substr($id, 0,-4);
-		$sqlRest="SELECT * from shop where ".$id;
+	}*/
+	if($criteria == 'all'){
+    $sqlRest="SELECT * FROM shops";
 	}else{
-		$sqlRest="SELECT * from shops";
+    $sqlRest="SELECT * FROM shops WHERE shop_cuisine LIKE '%".$criteria."%'";
+    /*echo $sqlRest;
+    exit();*/
 	}
 	$result = mysqli_query($conn,$sqlRest);
 ?>
-<script type="text/javascript">
-
-	function cuisinefilter(val){
-		window.location.href = "filter.php?criteria="+val;
-	}
-</script>
 <head>
   <title>COVID-Mart | Category</title>
 </head>
@@ -69,13 +68,13 @@
               <li class="common-filter">
                 <form action="#">
                   <ul>
-                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Medical')" type="radio" id="medical" name="category"><label for="medical"> Medical</label></li>
-                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Fruits & Vegetables')" type="radio" id="fruitsandvegetables" name="category"><label for="fruitsandvegetables">Fruits & Vegetables</label></li>
-                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Household')" type="radio" id="household" name="category"><label for="household">Household</label></li>
-                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Packaged Foods')" type="radio" id="packagedfood" name="category"><label for="packagedfood">Packaged Food</label></li>
-                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Eggs & Meat')" type="radio" id="eggsandmeat" name="category"><label for="eggsandmeat">Eggs & Meat</label></li>
-                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Beauty & Hygiene')" type="radio" id="beauty" name="category"><label for="beauty">Beauty & Hygiene</label></li>
-                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Others')" type="radio" id="others" name="category"><label for="others">Others</label></li>
+                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Medical')" type="radio" id="Medical" name="category"><label for="Medical"> Medical</label></li>
+                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Fruits and Vegetables')" type="radio" id="Fruits and Vegetables" name="category"><label for="Fruits and Vegetables">Fruits & Vegetables</label></li>
+                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Household')" type="radio" id="Household" name="category"><label for="Household">Household</label></li>
+                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Packaged Foods')" type="radio" id="Packaged Foods" name="category"><label for="Packaged Foods">Packaged Food</label></li>
+                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Eggs and Meat')" type="radio" id="Eggs and Meat" name="category"><label for="Eggs and Meat">Eggs & Meat</label></li>
+                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Beauty and Hygiene')" type="radio" id="Beauty and Hygiene" name="category"><label for="Beauty and Hygiene">Beauty & Hygiene</label></li>
+                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Others')" type="radio" id="Others" name="category"><label for="Others">Others</label></li>
                   </ul>
                 </form>
               </li>
@@ -98,26 +97,23 @@
                       $rating = $row['shop_rating'];
                       $cuisine = $row['shop_cuisine'];
                       $c++;
-              
                       $offset= '<div class="col-md-6 col-lg-4">
-                      <div class="card text-center card-product">
-                        <div class="card-product__img">
-                          <img class="card-img" src="'.$image.'" alt="">
-                        <ul class="card-product__imgOverlay">
-                          <li><button><i class="ti-search"></i></button></li>
-                          <li><button><i class="ti-shopping-cart"></i></button></li>
-                          <li><button><i class="ti-heart"></i></button></li>
-                        </ul>
-                      </div>
-                      <div class="card-body">
-                        <p>'.$cuisine.'</p>
-                        <h4 class="card-product__title"><a href="#">'.$name.'</a></h4>
-                        
-                      </div>
-                      </div>
-                      </div>';
+                                  <div class="card text-center card-product">
+                                    <div class="card-product__img">
+                                      <img class="card-img" src="'.$image.'" alt="">
+                                      <ul class="card-product__imgOverlay">
+                                        <li><button><i class="ti-search"></i></button></li>
+                                        <li><button><i class="ti-shopping-cart"></i></button></li>
+                                        <li><button><i class="ti-heart"></i></button></li>
+                                      </ul>
+                                    </div>
+                                    <div class="card-body">
+                                      <p>'.$cuisine.'</p>
+                                      <h4 class="card-product__title"><a href="#">'.$name.'</a></h4>
+                                    </div>
+                                  </div>
+                                </div>';
                       echo $offset;
-                    
                     }
                   }
 			        ?>
@@ -133,6 +129,14 @@
   </section>
 	<!-- ================ category section end ================= -->		  
 
+<script type="text/javascript">
+  var criteria = "<?= $_GET['criteria']; ?>";
+  document.getElementById(criteria).checked = true;
+
+  function cuisinefilter(val){
+    window.location.href = "category.php?criteria="+val;
+  }
+</script>
 	
 <?php
   include 'includes/footer.php';
