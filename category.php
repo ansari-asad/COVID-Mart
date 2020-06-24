@@ -28,6 +28,7 @@
 	if($criteria == 'all'){
     $sqlRest="SELECT * FROM shops";
 	}else{
+    $criteria = str_replace("and","&",$criteria);
     $sqlRest="SELECT * FROM shops WHERE shop_cuisine LIKE '%".$criteria."%'";
     /*echo $sqlRest;
     exit();*/
@@ -71,7 +72,7 @@
                     <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Medical')" type="radio" id="Medical" name="category"><label for="Medical"> Medical</label></li>
                     <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Fruits and Vegetables')" type="radio" id="Fruits and Vegetables" name="category"><label for="Fruits and Vegetables">Fruits & Vegetables</label></li>
                     <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Household')" type="radio" id="Household" name="category"><label for="Household">Household</label></li>
-                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Packaged Foods')" type="radio" id="Packaged Foods" name="category"><label for="Packaged Foods">Packaged Food</label></li>
+                    <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Packaged Food')" type="radio" id="Packaged Food" name="category"><label for="Packaged Food">Packaged Food</label></li>
                     <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Eggs and Meat')" type="radio" id="Eggs and Meat" name="category"><label for="Eggs and Meat">Eggs & Meat</label></li>
                     <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Beauty and Hygiene')" type="radio" id="Beauty and Hygiene" name="category"><label for="Beauty and Hygiene">Beauty & Hygiene</label></li>
                     <li class="filter-list"><input class="pixel-radio" onclick="cuisinefilter('Others')" type="radio" id="Others" name="category"><label for="Others">Others</label></li>
@@ -109,7 +110,7 @@
                                     </div>
                                     <div class="card-body">
                                       <p>'.$cuisine.'</p>
-                                      <h4 class="card-product__title"><a href="#">'.$name.'</a></h4>
+                                      <h4 class="card-product__title"><a href="store.php?shop_name='.$name.'">'.$name.'</a></h4>
                                     </div>
                                   </div>
                                 </div>';

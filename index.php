@@ -21,7 +21,7 @@
             <h4>BOOK Your Slot Now</h4>
               <h1 style="font-size:300%;">SHOP NOW SHOP SAFE</h1>
               <p>An interface that benefits local shops and citizens alike, ensuring the much needed social distancing.</p>
-              <a class="button button-hero" href="#">Browse Now</a>
+              <a class="button button-hero" href="category.php">Browse Now</a>
             </div>
           </div>
         </div>

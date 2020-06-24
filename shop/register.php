@@ -237,12 +237,15 @@ if(isset($_POST['submit'])){
 			values('$name','$address','$email','$open','$close','$cuisine','0','$num','$hashpwd');";
 		mysqli_query($conn,$sqlInsert);
 	}
-	foreach ($slot as $value){
-        $slotInsert= "INSERT INTO SLOTS values('$email','$value','$num')";
-        if(!mysqli_query($conn,$slotInsert)){
-            echo mysqli_error($conn);
-        }
-    }
+	$dates = array(date("d/m/Y"), date("d/m/Y", strtotime("tomorrow")), date("d/m/Y", strtotime("+2 Days")));
+	foreach ($dates as $date) {
+		foreach ($slot as $value){
+	        $slotInsert= "INSERT INTO SLOTS values('$name','$date','$value','$num')";
+	        if(!mysqli_query($conn,$slotInsert)){
+	            echo mysqli_error($conn);
+	        }
+	    }
+	}
 	$restname = str_replace(' ','',$name);
 	$addRest="CREATE table $restname(
 		item_id int(100) Auto_increment primary key,

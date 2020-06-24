@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2020 at 11:50 PM
+-- Generation Time: Jun 25, 2020 at 01:16 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -63,8 +63,9 @@ CREATE TABLE `shops` (
 --
 
 CREATE TABLE `slots` (
-  `shop_email` varchar(50) NOT NULL,
-  `Slot` varchar(100) NOT NULL,
+  `shop_name` varchar(100) NOT NULL,
+  `date` varchar(10) NOT NULL,
+  `slot` varchar(4) NOT NULL,
   `No of available` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

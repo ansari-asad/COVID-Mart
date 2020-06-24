@@ -4,6 +4,8 @@ $username = "root";
 $password = "";
 $dbname = "food1";
 
+date_default_timezone_set('Asia/Kolkata');
+
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
