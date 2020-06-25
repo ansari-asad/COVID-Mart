@@ -28,7 +28,7 @@
 	if($criteria == 'all'){
     $sqlRest="SELECT * FROM shops";
 	}else{
-    $criteria = str_replace("and","&",$criteria);
+    $criteria = str_replace(" and "," & ",$criteria);
     $sqlRest="SELECT * FROM shops WHERE shop_cuisine LIKE '%".$criteria."%'";
     /*echo $sqlRest;
     exit();*/
