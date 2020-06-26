@@ -89,14 +89,38 @@
 			$sql = "SELECT * FROM $shop";
 			$runsql = $conn->query($sql);
 			while ($row = $runsql->fetch_assoc()) {
+				$qty = 5;
+				if ($row['quantity'] < 5) {
+					$qty = $row['quantity'];
+				}
 				echo '<tr>
 				<td>'.$row['item_id'].'</td>
 				<td>'.$row['name'].'</td>
-				<td>'.$row['quantity'].'</td>
+				<td><div class="product_count">
+                        <input type="text" name="quantity" id="sst'.$row['item_id'].'" maxlength="12" value="1" title="Quantity:" class="input-text qty" disabled>
+                        <button onclick="var result = document.getElementById(\'sst'.$row['item_id'].'\');
+                        var cost = document.getElementById(\'price'.$row['item_id'].'\');
+                        var sst = result.value;
+                        if( !isNaN( sst ) &amp;&amp; sst < '.$qty.'){
+                        	result.value++;
+                        	document.getElementById(\'initial'.$row['item_id'].'\').style.display = \'None\';
+							cost.innerHTML = parseInt(document.getElementById(\'sst'.$row['item_id'].'\').value) * parseInt('.$row['price'].');
+                        }
+                        return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                        <button onclick="var result = document.getElementById(\'sst'.$row['item_id'].'\');
+                        var cost = document.getElementById(\'price'.$row['item_id'].'\');
+                        var sst = result.value;
+                        if( !isNaN( sst ) &amp;&amp; sst > 1 ){
+                        	result.value--;
+                        	document.getElementById(\'initial'.$row['item_id'].'\').style.display = \'None\';
+                        	cost.innerHTML = parseInt(document.getElementById(\'sst'.$row['item_id'].'\').value) * parseInt('.$row['price'].');
+                        }
+                        return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                    </div></td>
 				<td>'.$row['category'].'</td>
-				<td>'.$row['price'].'</td>
-				<td></td>
-				</tr>';
+				<td><p id="price'.$row['item_id'].'"><div id="initial'.$row['item_id'].'">'.$row['price'].'</div></p></td>
+				<td>';
+				echo '</td></tr>';
 			}
 			?>
 		</tbody>

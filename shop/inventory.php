@@ -41,9 +41,7 @@
 		<tr>
 			<td><input type="text" name="name" placeholder="Name" required></td>
 			<td><div class="product_count">
-    		    <input type="text" name="quantity" id="sst" maxlength="12" value="1" title="Quantity" class="input-text qty" required>
-    		    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-    		  	<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+    		    <input type="text" name="quantity" id="sst" maxlength="12" min="1" value="1" title="Quantity" class="input-text qty" required>
     		</div></td>
     		<td><div class="dropdown">
     			<select name="category">
