@@ -19,6 +19,8 @@ $dbname = "food1";
 
 date_default_timezone_set('Asia/Kolkata');
 
+$today = date("d/m/Y", strtotime("today"));
+
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 while (!$conn) {
@@ -36,7 +38,6 @@ while ($row = $runsql->fetch_assoc()) {
 	$open = $row['shop_open'];
 	$close = $row['shop_close'];
 	$date = date("d/m/Y", strtotime("+2 Days"));
-	$today = date("d/m/Y", strtotime("today"));
 	$slot = slotList($open, $close);
 	$num = $row['num'];
 
@@ -54,4 +55,12 @@ while ($row = $runsql->fetch_assoc()) {
 	    }
 	}
 }
+
+// Delete previous day orders
+$sql = "DELETE FROM `orders` WHERE STR_TO_DATE(`date`,'%d/%m/%Y') < STR_TO_DATE('$today','%d/%m/%Y')";
+while (!($runsql = $conn->query($sql))) {
+	sleep(5);
+}
+
+$conn->close();
 ?>

@@ -60,11 +60,12 @@
 						$sql = "SELECT * FROM slots WHERE shop_name = '$name' AND `date` = '$dt'";
 						$runsql = $conn->query($sql);
 						while ($row = $runsql->fetch_assoc()) {
-							echo '<option value="'.$row['slot'].'">'.$row['slot'].'</option>';
+							echo '<option value="'.$row['slot'].'">'.substr_replace( $row['slot'], ':', 2, 0 ).'</option>';
 						}
 						?>
 					</select>
 				</div>
+				<input type="text" name="shop_name" value="<?php echo $name; ?>" hidden>
 				<div class="sorting">
 					<button type="submit" name="bookSlot" style="align-content: right;" class="button button-login w-10">Book Slot</button>
 				</div>
