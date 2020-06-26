@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2020 at 01:16 AM
+-- Generation Time: Jun 26, 2020 at 11:37 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -29,11 +29,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `orders` (
-  `user_name` varchar(50) DEFAULT NULL,
-  `order_item` varchar(100) DEFAULT NULL,
-  `quantity` int(100) NOT NULL,
-  `cost` int(100) DEFAULT NULL,
-  `shop_name` varchar(100) DEFAULT NULL
+  `order_id` int(11) NOT NULL,
+  `user_email` varchar(50) DEFAULT NULL,
+  `order_items` varchar(500) DEFAULT NULL,
+  `quantity` varchar(100) NOT NULL,
+  `cost` varchar(100) DEFAULT NULL,
+  `shop_name` varchar(100) DEFAULT NULL,
+  `total` int(11) NOT NULL,
+  `date` varchar(10) NOT NULL,
+  `slot` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -43,7 +47,7 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `shops` (
-  `shop_id` int(100) NOT NULL,
+  `shop_id` int(11) NOT NULL,
   `shop_name` varchar(100) DEFAULT NULL,
   `shop_address` varchar(500) DEFAULT NULL,
   `shop_email` varchar(50) DEFAULT NULL,
@@ -52,7 +56,7 @@ CREATE TABLE `shops` (
   `shop_rating` float(2,1) DEFAULT NULL,
   `shop_image` varchar(255) DEFAULT NULL,
   `shop_cuisine` varchar(100) DEFAULT NULL,
-  `num` int(10) DEFAULT NULL,
+  `num` int(11) DEFAULT NULL,
   `shop_password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -76,7 +80,7 @@ CREATE TABLE `slots` (
 --
 
 CREATE TABLE `users` (
-  `user_id` int(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `user_name` varchar(50) DEFAULT NULL,
   `user_email` varchar(50) DEFAULT NULL,
   `user_password` varchar(100) DEFAULT NULL
@@ -85,6 +89,12 @@ CREATE TABLE `users` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`);
 
 --
 -- Indexes for table `shops`
@@ -105,16 +115,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `shops`
 --
 ALTER TABLE `shops`
-  MODIFY `shop_id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `shop_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
