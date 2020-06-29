@@ -37,14 +37,15 @@
 				<div class="sorting">
 					<select name="dateofslot" onchange="getSlots()" id="datesel">
 						<?php
-						$sql = "SELECT DISTINCT(date) FROM slots WHERE shop_name = '$name'";
+						$sql = "SELECT  DISTINCT(STR_TO_DATE(`date`, '%d/%m/%Y')) as slot_dates from slots ORDER BY slot_dates";
 						$runsql = $conn->query($sql);
 						while ($row = $runsql->fetch_assoc()) {
-							if (isset($_GET['datesel']) and $_GET['datesel'] == $row['date']) {
-								echo '<option value="'.$row['date'].'" selected>'.$row['date'].'</option>';
+							$date = implode("/", array_reverse(explode("-", $row['slot_dates'])));
+							if (isset($_GET['datesel']) and $_GET['datesel'] == $date) {
+								echo '<option value="'.$date.'" selected>'.$date.'</option>';
 							}
 							else{
-								echo '<option value="'.$row['date'].'">'.$row['date'].'</option>';
+								echo '<option value="'.$date.'">'.$date.'</option>';
 							}
 						}
 						?>
@@ -80,7 +81,7 @@
 			<th scope="col">Name</th>
 			<th scope="col">Quantity</th>
 			<th scope="col">Category</th>
-			<th scope="col">Price</th>
+			<th scope="col">Price (₹)</th>
 			<th scope="col"></th>
 		</thead>
 		<tbody>
@@ -103,7 +104,6 @@
                         var sst = result.value;
                         if( !isNaN( sst ) &amp;&amp; sst < '.$qty.'){
                         	result.value++;
-                        	document.getElementById(\'initial'.$row['item_id'].'\').style.display = \'None\';
 							cost.innerHTML = parseInt(document.getElementById(\'sst'.$row['item_id'].'\').value) * parseInt('.$row['price'].');
                         }
                         return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
@@ -112,14 +112,16 @@
                         var sst = result.value;
                         if( !isNaN( sst ) &amp;&amp; sst > 1 ){
                         	result.value--;
-                        	document.getElementById(\'initial'.$row['item_id'].'\').style.display = \'None\';
                         	cost.innerHTML = parseInt(document.getElementById(\'sst'.$row['item_id'].'\').value) * parseInt('.$row['price'].');
                         }
                         return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
                     </div></td>
 				<td>'.$row['category'].'</td>
-				<td><p id="price'.$row['item_id'].'"><div id="initial'.$row['item_id'].'">'.$row['price'].'</div></p></td>
+				<td><div id="price'.$row['item_id'].'">'.$row['price'].'</div></td>
 				<td>';
+				if (isset($_SESSION['user_email'])) {
+					echo '<button type="button" id="addCart'.$row['item_id'].'" class="button button-login w-10">Add to cart</button>';
+				}
 				echo '</td></tr>';
 			}
 			?>
@@ -133,12 +135,10 @@
 
 	if ("<?= isset($_SESSION['user_email']); ?>" == '1') {
 		document.getElementById('checkSlotBook').style.display = 'None';
-		// document.getElementById('slotBook').style.display = 'Block';
 	}
 	else{
 		document.getElementById('slotBook').style.display = 'None';
 		document.getElementById('loadLogin').addEventListener('click', (event) => {login()});
-		// document.getElementById('checkSlotBook').style.display = 'Block';
 	}
 
 	function login(){

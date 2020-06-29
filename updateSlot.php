@@ -37,9 +37,20 @@ while ($row = $runsql->fetch_assoc()) {
 	$name = $row['shop_name'];
 	$open = $row['shop_open'];
 	$close = $row['shop_close'];
-	$date = date("d/m/Y", strtotime("+2 Days"));
+	$date1 = date("d/m/Y", strtotime("tomorrow"));
+	$date2 = date("d/m/Y", strtotime("+2 Days"));
 	$slot = slotList($open, $close);
 	$num = $row['num'];
+	$dates = array();
+
+	// Get slot dates
+	$sqlDates = "SELECT DISTINCT(date) FROM slots WHERE shop_name = '$name'";
+	while (!($runsqlDates = $conn->query($sqlDates))) {
+		sleep(5);
+	}
+	while ($rowDates = $runsqlDates->fetch_assoc()) {
+		array_push($dates, $rowDates['date']);
+	}
 
 	// Delete unused slots
 	$sqlDelete = "DELETE FROM slots WHERE shop_name = '$name' AND STR_TO_DATE(`date`,'%d/%m/%Y') < STR_TO_DATE('$today','%d/%m/%Y')";
@@ -48,11 +59,29 @@ while ($row = $runsql->fetch_assoc()) {
 	}
 
 	// Insert next slots
-	foreach ($slot as $value){
-	    $slotInsert= "INSERT INTO SLOTS values('$name','$date','$value','$num')";
-	    while (!($runslotInsert = $conn->query($slotInsert))) {
-	    	sleep(5);
-	    }
+	if (!(in_array($today, $dates))) {
+		foreach ($slot as $value){
+		    $slotInsert= "INSERT INTO SLOTS values('$name','$today','$value','$num')";
+		    while (!($runslotInsert = $conn->query($slotInsert))) {
+		    	sleep(5);
+		    }
+		}
+	}
+	if (!(in_array($date1, $dates))) {
+		foreach ($slot as $value){
+		    $slotInsert= "INSERT INTO SLOTS values('$name','$date1','$value','$num')";
+		    while (!($runslotInsert = $conn->query($slotInsert))) {
+		    	sleep(5);
+		    }
+		}
+	}
+	if (!(in_array($date2, $dates))) {
+		foreach ($slot as $value){
+		    $slotInsert= "INSERT INTO SLOTS values('$name','$date2','$value','$num')";
+		    while (!($runslotInsert = $conn->query($slotInsert))) {
+		    	sleep(5);
+		    }
+		}
 	}
 }
 
