@@ -27,7 +27,7 @@
 <div class="container cart_area">
 	<div id="checkSlotBook" class="center">
 		<div class="sorting">
-			<button id="loadLogin" type="button" class="button button-login w-10">Login to Book Slot</button>
+			<button type="button" onclick="login()" class="button button-login w-10">Login to Book Slot</button>
 		</div>
 		<p></p>
 	</div>
@@ -74,6 +74,22 @@
 		</form>
 	</div>
 
+	<script type="text/javascript">
+		function calcTotal(toAdd, cost){
+			tot = document.getElementById('total');
+			if (toAdd) {
+				tot.innerHTML = parseInt(tot.textContent) + cost;
+			}
+			else {
+				tot.innerHTML = parseInt(tot.textContent) - cost;
+			}
+			if (tot.textContent == 0)
+				document.getElementById('checkout').style.display = 'None';
+			else
+				document.getElementById('checkout').style.display = 'Block';
+		}
+	</script>
+
 	<div class="cart_inner table-responsive">
 	<table class="table">
 		<thead>
@@ -82,13 +98,13 @@
 			<th scope="col">Quantity</th>
 			<th scope="col">Category</th>
 			<th scope="col">Price (₹)</th>
-			<th scope="col"></th>
 		</thead>
 		<tbody>
 			<?php
 			$shop = str_replace(' ', '', $name);
 			$sql = "SELECT * FROM $shop";
 			$runsql = $conn->query($sql);
+			$items = array();
 			while ($row = $runsql->fetch_assoc()) {
 				$qty = 5;
 				if ($row['quantity'] < 5) {
@@ -98,47 +114,64 @@
 				<td>'.$row['item_id'].'</td>
 				<td>'.$row['name'].'</td>
 				<td><div class="product_count">
-                        <input type="text" name="quantity" id="sst'.$row['item_id'].'" maxlength="12" value="1" title="Quantity:" class="input-text qty" disabled>
+                        <input type="text" name="quantity" id="sst'.$row['item_id'].'" maxlength="12" value="0" title="Quantity:" class="input-text qty" disabled>
                         <button onclick="var result = document.getElementById(\'sst'.$row['item_id'].'\');
                         var cost = document.getElementById(\'price'.$row['item_id'].'\');
                         var sst = result.value;
                         if( !isNaN( sst ) &amp;&amp; sst < '.$qty.'){
                         	result.value++;
+                        	calcTotal(1, '.$row['price'].');
 							cost.innerHTML = parseInt(document.getElementById(\'sst'.$row['item_id'].'\').value) * parseInt('.$row['price'].');
                         }
                         return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
                         <button onclick="var result = document.getElementById(\'sst'.$row['item_id'].'\');
                         var cost = document.getElementById(\'price'.$row['item_id'].'\');
                         var sst = result.value;
-                        if( !isNaN( sst ) &amp;&amp; sst > 1 ){
+                        if( !isNaN( sst ) &amp;&amp; sst > 0 ){
                         	result.value--;
-                        	cost.innerHTML = parseInt(document.getElementById(\'sst'.$row['item_id'].'\').value) * parseInt('.$row['price'].');
+                        	calcTotal(0, '.$row['price'].');
+                        	if(result.value == 0)
+                        		cost.innerHTML = '.$row['price'].';
+                        	else
+                        		cost.innerHTML = parseInt(document.getElementById(\'sst'.$row['item_id'].'\').value) * parseInt('.$row['price'].');
                         }
                         return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
                     </div></td>
 				<td>'.$row['category'].'</td>
-				<td><div id="price'.$row['item_id'].'">'.$row['price'].'</div></td>
-				<td>';
-				if (isset($_SESSION['user_email'])) {
-					echo '<button type="button" id="addCart'.$row['item_id'].'" class="button button-login w-10">Add to cart</button>';
-				}
-				echo '</td></tr>';
+				<td><div id="price'.$row['item_id'].'">'.$row['price'].'</div></td></tr>';
+				$items[] = $row['item_id'];
 			}
 			?>
+			<tr>
+				<td></td><td></td><td></td><td><h5>Total</h5></td>
+				<td><h5><div id="total">0</div></h5></td>
+			</tr>
 		</tbody>
 	</table>
+	<?php if (isset($_SESSION['user_email'])): ?>
+	<div align="right" id="checkout">
+		<form action="cart.php" method="post">
+			<input type="text" name="shop" value="<?= $shop; ?>" hidden>
+			<input type="text" id="totalitems" name="items" value="" hidden>
+			<input type="text" id ="totalquantities" name="quantities" value="" hidden>
+			<button type="button" onclick="addToCart()" class="button button-login w-10">Add to Cart</button>
+			<input type="submit" id="submitToCart" name="cartItems" hidden>
+		</form>
+	</div>
+	<?php endif ?>
 	</div>
 </div>
 
 <script type="text/javascript">
 	var dt = document.getElementById('datesel').value;
 
+	document.getElementById('checkout').style.display = 'None';
+
 	if ("<?= isset($_SESSION['user_email']); ?>" == '1') {
 		document.getElementById('checkSlotBook').style.display = 'None';
 	}
 	else{
 		document.getElementById('slotBook').style.display = 'None';
-		document.getElementById('loadLogin').addEventListener('click', (event) => {login()});
 	}
 
 	function login(){
@@ -148,6 +181,17 @@
 	function getSlots() {
 		var dt = document.getElementById('datesel').value;
 		window.location.href = 'store.php?shop_name='+"<?= $_GET['shop_name']; ?>"+'&datesel='+dt;
+	}
+
+	function addToCart(){
+		var items = <?php echo json_encode($items); ?>;
+		items.forEach(function (item){
+			if (document.getElementById('sst'+item).value > 0) {
+				document.getElementById('totalitems').value += item + ',';
+				document.getElementById('totalquantities').value += document.getElementById('sst'+item).value + ',';
+			}
+		});
+		document.getElementById('submitToCart').click();
 	}
 </script>
 

@@ -87,7 +87,7 @@
               	<div class="sorting col-xl-9 col-lg-8 col-md-7">
               		<label for="open">Opening Time</label>
               		<select name="open" id="open">
-              			<option value="9:00">09:00</option>
+              			<option value="09:00">09:00</option>
 						<option value="10:00">10:00</option>
 						<option value="11:00">11:00</option>
               		</select>
@@ -165,7 +165,12 @@ function slotList($start,$close){
         $slot[] = $start[0].'00';
         $slot[] = $start[0].'30';
         $start[0] = (int)$start[0] + 1;
-        $start[0] = (string)$start[0];
+        if ($start[0] < 10) {
+        	$start[0] = '0'.(string)$start[0];
+        }
+        else {
+        	$start[0] = (string)$start[0];
+    	}
     }
     return $slot;
 }
