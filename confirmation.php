@@ -27,12 +27,26 @@ function slotBook($conn, $shop_name, $date, $slot){
     echo "<script>alert('Error booking slot!');</script>";
     echo "<script>window.location.href = 'store.php?shop_name="+$shop_name+"'</script>";
   }
+
+  // Return unique id of last booked slot
+  $sql = "SELECT LAST_INSERT_ID() AS last_id";
+  $runsql = $conn->query($sql);
+  $row = $runsql->fetch_assoc();
+  return $row['last_id'];
 }
 if (isset($_POST['bookSlot'])) {
   $shop_name = $_POST['shop_name'];
   $date = $_POST['dateofslot'];
   $slot = $_POST['slot'];
   slotBook($conn, $shop_name, $date, $slot);
+}
+if (isset($_POST['bookItemSlot'])) {
+  $shop_name = $_POST['shop_name'];
+  $date = $_POST['dateofslot'];
+  $slot = $_POST['slot'];
+  $items = $_POST['items'];
+  $quantities = $_POST['quantities'];
+  $id = slotBook($conn, $shop_name, $date, $slot);
 }
 ?>
 
@@ -58,78 +72,39 @@ if (isset($_POST['bookSlot'])) {
   <section class="order_details section-margin--small">
     <div class="container">
       <p class="text-center billing-alert">Thank you. Your order has been received.</p>
-      <div id="slot">
+      <div>
         <div class="filter-bar d-flex flex-wrap align-items-center">
           <div class="sorting"><strong>Slot booked for <?php echo substr_replace( $slot, ':', 2, 0 ).' on '.$date?></strong></div>
         </div>
       </div>
-      <div id="details">
+      <?php if (isset($_POST['items'])): ?>
+      <div>
         <div class="row mb-5">
+          <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+          </div>
           <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
             <div class="confirmation-card">
               <h3 class="billing-title">Order Info</h3>
               <table class="order-rable">
                 <tr>
                   <td>Order number</td>
-                  <td>: 60235</td>
+                  <td>: <?= $id ?></td>
+                </tr>
+                <tr>
+                  <td>Shop Name</td>
+                  <td>: <?= $shop_name ?></td>
                 </tr>
                 <tr>
                   <td>Date</td>
-                  <td>: Oct 03, 2017</td>
+                  <td>: <?= $date ?></td>
+                </tr>
+                <tr>
+                  <td>Slot</td>
+                  <td>: <?= substr_replace( $slot, ':', 2, 0 ) ?></td>
                 </tr>
                 <tr>
                   <td>Total</td>
-                  <td>: USD 2210</td>
-                </tr>
-                <tr>
-                  <td>Payment method</td>
-                  <td>: Check payments</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
-            <div class="confirmation-card">
-              <h3 class="billing-title">Billing Address</h3>
-              <table class="order-rable">
-                <tr>
-                  <td>Street</td>
-                  <td>: 56/8 panthapath</td>
-                </tr>
-                <tr>
-                  <td>City</td>
-                  <td>: Dhaka</td>
-                </tr>
-                <tr>
-                  <td>Country</td>
-                  <td>: Bangladesh</td>
-                </tr>
-                <tr>
-                  <td>Postcode</td>
-                  <td>: 1205</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
-            <div class="confirmation-card">
-              <h3 class="billing-title">Shipping Address</h3>
-              <table class="order-rable">
-                <tr>
-                  <td>Street</td>
-                  <td>: 56/8 panthapath</td>
-                </tr>
-                <tr>
-                  <td>City</td>
-                  <td>: Dhaka</td>
-                </tr>
-                <tr>
-                  <td>Country</td>
-                  <td>: Bangladesh</td>
-                </tr>
-                <tr>
-                  <td>Postcode</td>
-                  <td>: 1205</td>
+                  <td id="total1"></td>
                 </tr>
               </table>
             </div>
@@ -138,70 +113,32 @@ if (isset($_POST['bookSlot'])) {
         <div class="order_details_table">
           <h2>Order Details</h2>
           <div class="table-responsive">
-            <table class="table">
+            <table class="table" id="orderTable">
               <thead>
                 <tr>
                   <th scope="col">Product</th>
                   <th scope="col">Quantity</th>
-                  <th scope="col">Total</th>
+                  <th scope="col">Sub-Total (₹)</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <p>Pixelstore fresh Blackberry</p>
-                  </td>
-                  <td>
-                    <h5>x 02</h5>
-                  </td>
-                  <td>
-                    <p>$720.00</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <p>Pixelstore fresh Blackberry</p>
-                  </td>
-                  <td>
-                    <h5>x 02</h5>
-                  </td>
-                  <td>
-                    <p>$720.00</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <p>Pixelstore fresh Blackberry</p>
-                  </td>
-                  <td>
-                    <h5>x 02</h5>
-                  </td>
-                  <td>
-                    <p>$720.00</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h4>Subtotal</h4>
-                  </td>
-                  <td>
-                    <h5></h5>
-                  </td>
-                  <td>
-                    <p>$2160.00</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h4>Shipping</h4>
-                  </td>
-                  <td>
-                    <h5></h5>
-                  </td>
-                  <td>
-                    <p>Flat rate: $50.00</p>
-                  </td>
-                </tr>
+                <?php
+                $shop = str_replace(' ', '', $shop_name);
+                $items = explode(',', $items);
+                $quantities = explode(',', $quantities);
+                $sql = "SELECT * FROM $shop WHERE item_id in (".implode(', ', $items).")";
+                $runsql = $conn->query($sql);
+                $costs = '';
+                while ($row = $runsql->fetch_assoc()) {
+                  echo '<tr>
+                  <td>'.$row['name'].'</td>
+                  <td><h5>'.$quantities[array_search($row['item_id'], $items)].'</h5></td>
+                  <td><p>'.$row['price'] * $quantities[array_search($row['item_id'], $items)].'</p></td>
+                  </tr>';
+                  $costs .= $row['price'].',';
+                }
+                $costs = substr($costs, 0, -1);
+                ?>
                 <tr>
                   <td>
                     <h4>Total</h4>
@@ -210,7 +147,7 @@ if (isset($_POST['bookSlot'])) {
                     <h5></h5>
                   </td>
                   <td>
-                    <h4>$2210.00</h4>
+                    <h4 id="total2"></h4>
                   </td>
                 </tr>
               </tbody>
@@ -218,13 +155,43 @@ if (isset($_POST['bookSlot'])) {
           </div>
         </div>
       </div>
+      <?php endif ?>
     </div>
   </section>
   <!--================End Order Details Area =================-->
 
-<?php
-  if (!isset($_POST['items'])) {
-    echo "<script>document.getElementById('details').style.display = 'None';</script>";
+<script type="text/javascript">
+  var total = 0;
+  for (var i = 1; i < document.getElementById("orderTable").rows.length - 1; i++) {
+    total += parseInt(document.getElementById("orderTable").rows[i].cells[2].textContent);
   }
+  document.getElementById('total1').innerHTML = ': ₹' + total;
+  document.getElementById('total2').innerHTML = '₹' + total;
+</script>
+
+<?php
+if (isset($_POST['bookItemSlot'])) {
+  foreach ($items as $index => $item) {
+    $sql = "UPDATE $shop SET quantity = quantity - $quantities[$index] WHERE item_id = $item";
+    if (!($runsql = $conn->query($sql))) {
+      echo "<script>alert('Error booking slot!');</script>";
+      echo "<script>window.location.href = 'cart.php'</script>";
+    }
+  }
+  echo "<br>";
+  $items = implode(', ', $items);
+  $quantities = implode(', ', $quantities);
+  $sql = "UPDATE orders SET order_items = '$items', quantity = '$quantities', cost = '$costs' WHERE order_id = $id";
+  if (!($runsql = $conn->query($sql))) {
+    echo "<script>alert('Error booking slot!');</script>";
+    echo "<script>window.location.href = 'cart.php'</script>";
+  }
+  unset($_SESSION['cart_shop']);
+  unset($_SESSION['items']);
+  unset($_SESSION['quantities']);
+}
+?>
+
+<?php
   include 'includes/footer.php';
 ?>

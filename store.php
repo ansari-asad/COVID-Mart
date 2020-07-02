@@ -37,7 +37,7 @@
 				<div class="sorting">
 					<select name="dateofslot" onchange="getSlots()" id="datesel">
 						<?php
-						$sql = "SELECT  DISTINCT(STR_TO_DATE(`date`, '%d/%m/%Y')) as slot_dates from slots ORDER BY slot_dates";
+						$sql = "SELECT DISTINCT(STR_TO_DATE(`date`, '%d/%m/%Y')) AS slot_dates FROM slots WHERE shop_name = '$name' ORDER BY slot_dates";
 						$runsql = $conn->query($sql);
 						while ($row = $runsql->fetch_assoc()) {
 							$date = implode("/", array_reverse(explode("-", $row['slot_dates'])));
@@ -151,11 +151,11 @@
 	<?php if (isset($_SESSION['user_email'])): ?>
 	<div align="right" id="checkout">
 		<form action="cart.php" method="post">
-			<input type="text" name="shop" value="<?= $shop; ?>" hidden>
+			<input type="text" name="cart_shop" value="<?= $name; ?>" hidden>
 			<input type="text" id="totalitems" name="items" value="" hidden>
 			<input type="text" id ="totalquantities" name="quantities" value="" hidden>
 			<button type="button" onclick="addToCart()" class="button button-login w-10">Add to Cart</button>
-			<input type="submit" id="submitToCart" name="cartItems" hidden>
+			<input type="submit" id="addCart" name="addCart" hidden>
 		</form>
 	</div>
 	<?php endif ?>
@@ -163,7 +163,14 @@
 </div>
 
 <script type="text/javascript">
+	if(performance.navigation.type == 2){
+	   location.reload(true);
+	}
+
 	var dt = document.getElementById('datesel').value;
+
+	document.getElementById('totalitems').value = '';
+	document.getElementById('totalquantities').value = '';
 
 	document.getElementById('checkout').style.display = 'None';
 
@@ -191,7 +198,9 @@
 				document.getElementById('totalquantities').value += document.getElementById('sst'+item).value + ',';
 			}
 		});
-		document.getElementById('submitToCart').click();
+		document.getElementById('totalitems').value = document.getElementById('totalitems').value.slice(0, -1);
+		document.getElementById('totalquantities').value = document.getElementById('totalquantities').value.slice(0, -1);
+		document.getElementById('addCart').click();
 	}
 </script>
 

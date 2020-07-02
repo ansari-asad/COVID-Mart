@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2020 at 11:37 PM
+-- Generation Time: Jul 03, 2020 at 02:59 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -35,7 +35,6 @@ CREATE TABLE `orders` (
   `quantity` varchar(100) NOT NULL,
   `cost` varchar(100) DEFAULT NULL,
   `shop_name` varchar(100) DEFAULT NULL,
-  `total` int(11) NOT NULL,
   `date` varchar(10) NOT NULL,
   `slot` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -130,7 +129,7 @@ ALTER TABLE `shops`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
