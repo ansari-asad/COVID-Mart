@@ -13,7 +13,15 @@
 					<h1>Register</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item">
+              <?php
+                if (isset($_SESSION['shop_email'])) {
+                  echo '<a href="index.php">';
+                }
+                else{
+                  echo '<a href="../index.php">';
+                }
+              ?>Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Register</li>
             </ol>
           </nav>

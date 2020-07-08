@@ -105,7 +105,6 @@ if(isset($_POST['submit'])){
 	$sql = "INSERT INTO users(user_name,user_email,user_password) VALUES ('$name','$email','$hashpwd')";
 
 	if (mysqli_query($conn, $sql)) {
-		echo "<script>alert('Registration Successful!');</script>";
 		echo "<script>window.open('login.php', '_self');</script>";
 	} else {
 	    echo "Error: " . $sql . "<br>" . mysqli_error($conn);

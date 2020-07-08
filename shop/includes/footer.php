@@ -15,7 +15,15 @@
 						<div class="single-footer-widget tp_widgets">
 							<h4 class="footer_title">Quick Links</h4>
 							<ul class="list">
-								<li><a href="index.php">Home</a></li>
+								<li>
+								<?php
+					                if (isset($_SESSION['shop_email'])) {
+					                  echo '<a href="index.php">';
+					                }
+					                else{
+					                  echo '<a href="../index.php">';
+					                }
+					            ?>Home</a></li>
 								<?php
               					  if (isset($_SESSION['shop_email'])) {
               					    echo '<li><a href="manageShop.php">Manage Shop</a></li>';

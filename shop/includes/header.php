@@ -43,7 +43,16 @@
           </button>
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-              <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+              <li class="nav-item">
+              <?php
+                if (isset($_SESSION['shop_email'])) {
+                  echo '<a class="nav-link" href="index.php">';
+                }
+                else{
+                  echo '<a class="nav-link" href="../index.php">';
+                }
+              ?>
+              Home</a></li>
               <?php
                 if (isset($_SESSION['shop_email'])) {
                   echo '<li class="nav-item"><a href="manageShop.php" class="nav-link" >Manage Shop</a></li>';

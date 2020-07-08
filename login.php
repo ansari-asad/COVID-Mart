@@ -88,7 +88,6 @@
 		if($runsql->num_rows > 0 and password_verify($password, $row['user_password'])){
 			$_SESSION['user_email'] = $email;
 			$_SESSION['user_name'] = $row['user_name'];
-			echo "<script>alert('You logged in successfully!')</script>";
 			echo "<script>window.open('index.php','_self')</script>";
 		}
 		else{
@@ -98,7 +97,6 @@
 			if($runsql->num_rows > 0 and password_verify($password, $row['shop_password'])){
 				$_SESSION['shop_email'] = $email;
 				$_SESSION['shop_name'] = $row['shop_name'];
-				echo "<script>alert('You logged in successfully!')</script>";
 				echo "<script>window.open('shop/index.php','_self')</script>";
 			}
 			else{

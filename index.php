@@ -1,5 +1,9 @@
 <?php
   include 'includes/header.php';
+  if (isset($_SESSION['user_email'])) {
+    $sql = "SELECT * FROM orders WHERE user_email='".$_SESSION['user_email']."'";
+    $runsql=$conn->query($sql);
+  }
 ?>
 <head>
   <title>COVID-Mart | Home</title>
@@ -27,7 +31,41 @@
         </div>
       </div>
     </section>
-    <!--================ Hero banner start =================-->    
+    <!--================ Hero banner start =================-->
+
+    <?php if (isset($_SESSION['user_email']) and $runsql->num_rows > 0): ?>
+      <div class="container cart_area">
+        <div class="storage cart_inner table-responsive">
+          <table class="table">
+          <thead>
+            <th scope="col">Order ID</th>
+            <th scope="col">Shop</th>
+            <th scope="col">Date</th>
+            <th scope="col">Slot</th>
+            <th scope="col"></th>
+          </thead>
+          <tbody>
+            <?php
+            while ($row = $runsql->fetch_assoc()) {
+              echo '<tr>
+              <td><h5>'.$row['order_id'].'</h5></td>
+              <td>'.$row['shop_name'].'</td>
+              <td><h5>'.$row['date'].'</h5></td>
+              <td><h5>'.substr_replace( $row['slot'], ':', 2, 0 ).'</h5></td><td><center>';
+              if (isset($row['order_items'])) {
+                echo '<a class="button button-coupon" href="order.php?id='.$row['order_id'].'">View Order</a>';
+              }
+              else {
+                echo 'No items booked';
+              }
+              echo '</center></td></tr>';
+            }
+            ?>
+          </tbody>
+          </table>
+        </div>
+      </div>
+    <?php endif ?>
 
 </main>
 <?php
