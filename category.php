@@ -94,11 +94,12 @@
                   if(mysqli_num_rows($result)>0){
                     while($row = mysqli_fetch_array($result)){
                       $name =  $row['shop_name'];
-                      $image = $row['shop_image'];
+                      $image = "./img/home/hero-slide3.png";
                       $rating = $row['shop_rating'];
                       $cuisine = $row['shop_cuisine'];
                       $c++;
                       $offset= '<div class="col-md-6 col-lg-4">
+                                
                                   <div class="card text-center card-product">
                                     <div class="card-product__img">
                                       <img class="card-img" src="'.$image.'" alt="">
